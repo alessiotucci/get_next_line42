@@ -1,8 +1,0 @@
-The project requires you to write a function in C language	named	"get_next_line":
- which will take an integer (file descriptor) as a parameter and return a line of text read from the file pointed by the file descriptor. The function should be able to read the text file one line at a time by repeatedly calling the function (e.g. using a loop).
-
-If there is no text left to read or if an error occurs, the function should return NULL. The function should work for both reading from a file and from the standard input. The returned line should include the ending '\n' character, except if the end of the file was reached and does not end with a '\n' character.
-
-The project must include three files: "get_next_line.c", "get_next_line_utils.c", and "get_next_line.h". The header file "get_next_line.h" must contain the prototype of the "get_next_line" function. All helper functions used by the get_next_line function should be written in the "get_next_line_utils.c" file.
-
-The function must use the functions "read", "malloc", and "free".

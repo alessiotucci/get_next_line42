@@ -6,54 +6,40 @@
 /*   By: atucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:39:29 by atucci            #+#    #+#             */
-/*   Updated: 2023/02/03 15:10:58 by atucci           ###   ########.fr       */
+/*   Updated: 2023/02/06 11:22:37 by atucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-// library to use open
-#include <stdlib.h>
-// library to use malloc 
-#include <unistd.h>
-// library to use read  
-#include <stdio.h>
-// library to use Printf for testing
-#include <strings.h>
-// library to use strlen for testing 
-int main()
+#include "get_next_line.h"
+
+int	main()
 {
 	int fd;
 	int	len;
-	 char *pointer; // this  pointer  is used in Read function
-	char *final;	// this pointer is used to Printf function
+	char *pointer; // this  pointer  is used in Read function
+	static char *final;	// this pointer is used to Printf function
 	int count;
 	
-	pointer = malloc(sizeof(char) * 100);
+	pointer = malloc(BUFFER_SIZE + 1);
 	if (pointer == NULL)
 		return (0);
 
-	printf( "pointer address: %p\n", pointer);
 	// checking the dynamic allocation of memory
 	fd = open("shortsubject.txt", O_RDONLY);
-	int fd1 = open("testo.txt", O_RDONLY);
-	
-	// this is just to understand the file descriptor
-	printf( "this is  the file  descriptor: %d\n", fd);
-	printf( "this is  the file  descriptor: %d\n", fd1);
 
 	// read function allow me to read the text file
-	int	bytes_read = read(fd,pointer,50);
+	int	bytes_read = read(fd,pointer,BUFFER_SIZE);
 	// it store the information in the pointer passed as paramater
 	len = strlen(pointer);
 	
 	// loops throught the entire text file
+	// THIS IS NOT SAID IN THE SUBJECT
 	while (bytes_read != 0)
 	{
 		// allocating the memory for final, which will contain the line with the desired char
 		final = malloc(sizeof(char) * len + 1);
 		if (final == NULL)
 			return (0);
-		printf( "final address: %p\n", final);
 		count = 0;
 		while (pointer[count] != '\n')
 		{
@@ -72,19 +58,23 @@ int main()
 		}
 	
 		// add null terminator to the final
-		final[count] = '\0';
+		final[count] = '\n';
+		final[count + 1] = '\0';
 		
 		// print the result
-		printf( "this is the line: %s", pointer);
-		printf( "lenght: %d\n", len);
-		printf( "%s", final);
+		
+		printf( "THIS IS THE LINE\n%s", pointer);
+		
+		
+		//printf( "final: %s\n", final);
 		// freeing and closing the  file
-		free(final);
+		// free(final);
 		bytes_read = read(fd, pointer, 100);
 		len = strlen(pointer);
 	}
 		close(fd);
 	free(pointer);
+	free(final);
 	return (0);	
 }
 

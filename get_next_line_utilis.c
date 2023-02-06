@@ -6,7 +6,7 @@
 /*   By: atucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:40:09 by atucci            #+#    #+#             */
-/*   Updated: 2023/02/03 14:35:24 by atucci           ###   ########.fr       */
+/*   Updated: 2023/02/06 11:21:31 by atucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,5 @@ void *my_realloc(void *ptr, size_t size)
 	
 	ft_memcpy(new_ptr, ptr, size);
 	free(ptr);
-	return new_ptr;
+	return (new_ptr);
 }
