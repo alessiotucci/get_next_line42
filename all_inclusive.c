@@ -6,7 +6,7 @@
 /*   By: atucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:39:29 by atucci            #+#    #+#             */
-/*   Updated: 2023/02/06 11:22:37 by atucci           ###   ########.fr       */
+/*   Updated: 2023/02/06 15:13:03 by atucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ int	main()
 		
 		// print the result
 		
-		printf( "THIS IS THE LINE\n%s", pointer);
+		//printf( "THIS IS THE LINE\n%s", pointer);
 		
 		
-		//printf( "final: %s\n", final);
+		printf( "final:\n%s\n", final);
 		// freeing and closing the  file
 		// free(final);
 		bytes_read = read(fd, pointer, 100);
