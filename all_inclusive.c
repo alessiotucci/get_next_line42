@@ -6,7 +6,7 @@
 /*   By: atucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:39:29 by atucci            #+#    #+#             */
-/*   Updated: 2023/02/06 15:13:03 by atucci           ###   ########.fr       */
+/*   Updated: 2023/02/08 17:00:21 by atucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	main()
 	// THIS IS NOT SAID IN THE SUBJECT
 	while (bytes_read != 0)
 	{
+	
 		// allocating the memory for final, which will contain the line with the desired char
 		final = malloc(sizeof(char) * len + 1);
 		if (final == NULL)
@@ -63,10 +64,10 @@ int	main()
 		
 		// print the result
 		
-		//printf( "THIS IS THE LINE\n%s", pointer);
+		printf( "THIS IS THE DATA STORED IN THE BUFFER\n%s", pointer);
 		
 		
-		printf( "final:\n%s\n", final);
+		printf( "copied line:\n%s", final);
 		// freeing and closing the  file
 		// free(final);
 		bytes_read = read(fd, pointer, 100);
