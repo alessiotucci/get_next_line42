@@ -1,15 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   testing_with.c                                     :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/09 16:19:24 by atucci            #+#    #+#             */
-/*   Updated: 2023/02/09 16:19:36 by atucci           ###   ########.fr       */
+/*   Created: 2023/02/16 14:51:04 by atucci            #+#    #+#             */
+/*   Updated: 2023/02/16 15:13:32 by atucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "get_next_line.h"
 
 char *get_next_line(int fd)
@@ -20,7 +19,7 @@ int len;
 int bytes_read;
 char *final;
 int i;
-    
+
     if (fd < 0 || BUFFER_SIZE < 0)
     return (NULL);
 if (!pointer)
@@ -40,7 +39,7 @@ final = malloc(sizeof(char) * (len + 1));
 if (!final)
 {
     free(pointer);
-    return (NULL);
+    return(NULL);
 }
 
 i = 0;
@@ -66,12 +65,19 @@ if (!pointer)
     return (NULL);
 }
 bytes_read = read(fd, pointer + len, BUFFER_SIZE);
-    if (bytes_read == 0 || bytes_read == -1)
+    if (bytes_read <= 0 )
     {
+        if (final && strlen(final) > 0) // my fix
+        {
+            final[i] = '\0';
+            free(pointer);
+            pointer = NULL;
+            return (final);
+        }
         free(pointer);
         free(final);
-        return (NULL);
-    }
+           return (NULL);
 
+    }
 return (get_next_line(fd));
 }

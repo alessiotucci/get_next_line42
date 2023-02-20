@@ -6,7 +6,7 @@
 /*   By: atucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/02 10:39:45 by atucci            #+#    #+#             */
-/*   Updated: 2023/02/08 09:20:09 by atucci           ###   ########.fr       */
+/*   Updated: 2023/02/09 11:14:48 by atucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 // define the buffer size
 # ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1000
+# define BUFFER_SIZE 5
 # endif
 
 
@@ -29,5 +29,10 @@
 #include <strings.h>
 // library to use strlen for testing
 //
+char *get_next_line(int fd);
+void *my_realloc(void *ptr, size_t size);
+void	*ft_memcpy(void *dest, const void *sour, size_t n);
 
 #endif
+
+

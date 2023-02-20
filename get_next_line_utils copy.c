@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: atucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/02 10:40:09 by atucci            #+#    #+#             */
-/*   Updated: 2023/02/08 17:00:38 by atucci           ###   ########.fr       */
+/*   Created: 2023/02/08 16:58:45 by atucci            #+#    #+#             */
+/*   Updated: 2023/02/08 17:00:55 by atucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,18 @@ void *my_realloc(void *ptr, size_t size)
 {
 	if (ptr == NULL)
 	return malloc(size);
-	
+
 	if (size == 0)
 	{
 		free(ptr);
 		return (NULL);
 	}
-	
+
 	void *new_ptr = malloc(size);
-	
+
 	if (new_ptr == NULL)
 	return (NULL);
-	
+
 	ft_memcpy(new_ptr, ptr, size);
 	free(ptr);
 	return (new_ptr);

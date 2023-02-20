@@ -6,7 +6,7 @@
 /*   By: atucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 17:29:55 by atucci            #+#    #+#             */
-/*   Updated: 2023/02/12 12:19:10 by atucci           ###   ########.fr       */
+/*   Updated: 2023/02/15 16:35:05 by atucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ int len;
 int bytes_read;
 char *final;
 int i;
-    
+int multy = 500;
+if (BUFFER_SIZE < 10000000)
+	BUFFER_SIZE = (BUFFER_SIZE + multy);
+
     if (fd < 0 || BUFFER_SIZE < 0)
     return (NULL);
 if (!pointer)
