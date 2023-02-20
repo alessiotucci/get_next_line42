@@ -6,7 +6,7 @@
 /*   By: atucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:51:04 by atucci            #+#    #+#             */
-/*   Updated: 2023/02/20 17:05:51 by atucci           ###   ########.fr       */
+/*   Updated: 2023/02/20 17:52:23 by atucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -54,6 +54,8 @@ i = 0;
 	i++;
 	}
 count += len;
+//gpt fix
+final[i] = '\0';
 	if (!pointer)
 	pointer = realloc(pointer, sizeof(char) * (len + BUFFER_SIZE + 1));
 	if (!pointer)
