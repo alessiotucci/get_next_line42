@@ -6,7 +6,7 @@
 /*   By: atucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:51:04 by atucci            #+#    #+#             */
-/*   Updated: 2023/02/20 17:52:23 by atucci           ###   ########.fr       */
+/*   Updated: 2023/02/20 18:20:30 by atucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "get_next_line.h"
@@ -30,10 +30,10 @@ char	*get_next_line(int fd)
 		bytes_read = read(fd, pointer, BUFFER_SIZE);
 		if (bytes_read == -1 || bytes_read == 0)
 			return (NULL);
-		len = strlen(pointer);
+		len = ft_strlen(pointer);
 	}
 	else
-		len = strlen(pointer + count);
+		len = ft_strlen(pointer + count);
 final = malloc(sizeof(char) * (len + 1));
 	if (!final)
 	{
@@ -55,7 +55,7 @@ i = 0;
 	}
 count += len;
 //gpt fix
-final[i] = '\0';
+final[i] = '\0'; // making sure final is alwalys null terminated
 	if (!pointer)
 	pointer = realloc(pointer, sizeof(char) * (len + BUFFER_SIZE + 1));
 	if (!pointer)
@@ -66,7 +66,7 @@ final[i] = '\0';
 bytes_read = read(fd, pointer + len, BUFFER_SIZE);
 	if (bytes_read <= 0)
 	{
-		if (final && strlen(final) > 0) // my fix
+		if (final && ft_strlen(final) > 0) // my fix
 		{
 			final[i] = '\0';
 			free(pointer);

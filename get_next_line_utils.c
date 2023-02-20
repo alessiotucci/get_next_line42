@@ -6,7 +6,7 @@
 /*   By: atucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:58:45 by atucci            #+#    #+#             */
-/*   Updated: 2023/02/08 17:00:55 by atucci           ###   ########.fr       */
+/*   Updated: 2023/02/20 18:18:46 by atucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,14 @@ void *my_realloc(void *ptr, size_t size)
 	ft_memcpy(new_ptr, ptr, size);
 	free(ptr);
 	return (new_ptr);
+}
+
+size_t	ft_strlen(const char *str)
+{
+	size_t count;
+
+	count = 0;
+	while (str[count])
+		count++;
+	return (count);
 }
