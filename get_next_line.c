@@ -5,77 +5,100 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: atucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/16 14:51:04 by atucci            #+#    #+#             */
-/*   Updated: 2023/02/20 18:20:30 by atucci           ###   ########.fr       */
+/*   Created: 2023/03/02 12:51:19 by atucci            #+#    #+#             */
+/*   Updated: 2023/03/02 12:53:41 by atucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// The get_next_line function reads the next line from a file descriptor (fd)
+// and returns it as a string.
+// It also saves the remaining text after the newline character in a static variable called 'backup'.
+
 #include "get_next_line.h"
 
-char	*get_next_line(int fd)
-{
-	static char	*pointer = NULL;
-	static int	count = 0;
-	int			len;
-	int			bytes_read;
-	char		*final;
-	int			i;
+// ft_read_to_backup reads from file descriptor (fd) until it finds a newline character
+// or reaches the end of the file. It saves the text read in the backup variable and returns it.
+// If an error occurs, it returns NULL.
 
-	if (fd < 0 || BUFFER_SIZE < 0)
-		return (NULL);
-	if (!pointer)
+char *ft_read_to_backup(int fd, char *backup)
+{
+char *buff;
+int bytes;
+
+// Allocate memory for the buffer to read data from the file descriptor
+
+buff = malloc(BUFFER_SIZE + 1);
+if (!buff)
+	return (NULL);
+
+bytes = 1;
+
+// Continue reading until a newline character is found or the end of file is reached
+
+while (!ft_strchr(backup, '\n') && bytes != 0)
+{
+
+	// Read data from the file descriptor into the buffer
+
+	bytes = read(fd, buff, BUFFER_SIZE);
+	if (bytes == -1)
 	{
-		pointer = malloc(BUFFER_SIZE + 1);
-		if (!pointer)
-			return (NULL);
-		bytes_read = read(fd, pointer, BUFFER_SIZE);
-		if (bytes_read == -1 || bytes_read == 0)
-			return (NULL);
-		len = ft_strlen(pointer);
-	}
-	else
-		len = ft_strlen(pointer + count);
-final = malloc(sizeof(char) * (len + 1));
-	if (!final)
-	{
-		free(pointer);
-		return (NULL);
-	}
-i = 0;
-	while (i < len)
-	{
-		if (pointer[count + i] == '\n')
-		{
-		final[i] = '\n';
-		final[i + 1] = '\0';
-		count += i + 1;
-			return (final);
-		}
-	final[i] = pointer[count + i];
-	i++;
-	}
-count += len;
-//gpt fix
-final[i] = '\0'; // making sure final is alwalys null terminated
-	if (!pointer)
-	pointer = realloc(pointer, sizeof(char) * (len + BUFFER_SIZE + 1));
-	if (!pointer)
-	{
-		free(final);
+
+		// If an error occurs, free the buffer and return NULL
+
+		free(buff);
 		return (NULL);
 	}
-bytes_read = read(fd, pointer + len, BUFFER_SIZE);
-	if (bytes_read <= 0)
-	{
-		if (final && ft_strlen(final) > 0) // my fix
-		{
-			final[i] = '\0';
-			free(pointer);
-			pointer = NULL;
-			return (final);
-		}
-		free(pointer);
-		free(final);
-		return (NULL);
-	}
-	return (get_next_line(fd));
+	buff[bytes] = '\0';
+
+	// Append the buffer to the backup string
+
+	backup = ft_strjoin(backup, buff);
+}
+
+
+// Free the buffer and return the backup string
+
+free(buff);
+return (backup);
+}
+
+
+// The get_next_line function reads the next line from a file descriptor (fd)
+// and returns it as a string.
+// It also saves the remaining text after the newline character in a static variable called 'backup'.
+
+
+char *get_next_line(int fd)
+{
+char *line;
+static char *backup;
+
+// If file descriptor (fd) is invalid or buffer size is less than or equal to zero, return NULL
+
+
+if (fd < 0 || BUFFER_SIZE <= 0)
+	return (0);
+
+
+// Read from file descriptor (fd) and save the text in the backup variable
+
+
+backup = ft_read_to_backup(fd, backup);
+if (!backup)
+	return (NULL);
+
+// Get the line from the backup variable and save it in the line variable
+
+
+line = ft_get_line(backup);
+
+// Update the backup variable to contain the remaining text after the newline character
+
+
+backup = ft_backup(backup);
+
+// Return the line read from the file descriptor
+
+return (line);
 }
