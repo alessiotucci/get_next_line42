@@ -6,7 +6,7 @@
 /*   By: atucci <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 14:51:04 by atucci            #+#    #+#             */
-/*   Updated: 2023/03/03 15:28:15 by atucci           ###   ########.fr       */
+/*   Updated: 2023/03/03 15:30:09 by atucci           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 */
 
 char *get_next_line(int fd)
+
 {
 static char *pointer = NULL; // static pointer variable stores the string to be read
 static int count = 0; // static count variable keeps track of how much of the pointer variable has been read
@@ -31,6 +32,7 @@ int len;
 int bytes_read;
 char *final;
 int i;
+
 if (fd < 0 || BUFFER_SIZE < 0) // checking for invalid file descriptor or buffer size
 	return (NULL);
 
